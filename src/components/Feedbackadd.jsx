@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import FeedbackContext from "../Context/FeedbackContext";
 import { useState } from "react";
 import Card from "./shared/Card";
 import Ratings from "./Ratings";
@@ -7,7 +9,10 @@ import Message from "./shared/Message";
 let isDisabled = false
 let selectedRate;
 
-function Feedbackadd({addFeedback}) {
+function Feedbackadd() {
+
+    const {handleAdd} = useContext(FeedbackContext)
+
 
 
 
@@ -27,7 +32,7 @@ function Feedbackadd({addFeedback}) {
             text: textvalue
         }
 
-        addFeedback(newData)
+        handleAdd(newData)
 
         
         setTextvalue('')
