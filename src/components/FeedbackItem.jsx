@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import FeedbackContext from "../Context/FeedbackContext";
-import { FaTimes } from 'react-icons/fa';
+import { FaTimes, FaEdit } from 'react-icons/fa';
 import Card from './shared/Card';
 import PropTypes from 'prop-types';
 
 function FeedbackItem({item}){
 
-    const {deleteFeeback} = useContext(FeedbackContext)
+    const {deleteFeeback, editFeedback} = useContext(FeedbackContext)
 
     
    
@@ -16,6 +16,9 @@ function FeedbackItem({item}){
             <p className="text">{item.text}</p>
             <button onClick={() => deleteFeeback(item.id)} className="close">
                 <FaTimes color="black" />
+            </button>
+            <button onClick={()=>editFeedback(item)} className="edit">
+                <FaEdit color="#5E8199" />
             </button>
         </Card>
     )

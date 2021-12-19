@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import FeedbackContext from "../Context/FeedbackContext";
 import { useState } from "react";
 import Card from "./shared/Card";
@@ -6,19 +6,30 @@ import Ratings from "./Ratings";
 import Button from "./shared/Button";
 import Message from "./shared/Message";
 
-let isDisabled = false
-let selectedRate;
+
 
 function Feedbackadd() {
 
-    const {handleAdd} = useContext(FeedbackContext)
+    const {handleAdd, editedFeedbackItem, handleUpdate} = useContext(FeedbackContext)
+
+    const [textvalue, setTextvalue] = useState("")
+
+    const [msgtext, setMsgtext] = useState("")
+
+    const [selectedRate, setSelectedRate] = useState("")
+
+    const [isDisabled, setIsDisabled] = useState(true)
+
+    
 
 
 
 
     const chosenRating = (rate) => {
-         selectedRate = rate
+        setSelectedRate(rate)
     }
+
+    
   
     const handleSubmit = (e) => {
         
@@ -32,7 +43,15 @@ function Feedbackadd() {
             text: textvalue
         }
 
-        handleAdd(newData)
+        if(editedFeedbackItem.editOn===true ){
+
+            handleUpdate(editedFeedbackItem.item.id, newData)
+
+        }
+
+        else {
+            handleAdd(newData)
+        }
 
         
         setTextvalue('')
@@ -40,26 +59,33 @@ function Feedbackadd() {
         
     }
 
-    const [textvalue, setTextvalue] = useState("")
+    useEffect(() => {
 
-    const [msgtext, setMsgtext] = useState("")
+        setTextvalue(editedFeedbackItem.item.text)
+        setSelectedRate(editedFeedbackItem.item.rating)
+        setIsDisabled(false)
+        
+
+    }, [editedFeedbackItem])
+
+    
 
     const handleChange = (e) => {
 
         setTextvalue(e.target.value)
 
         if(textvalue === ''){
-            isDisabled = true
+            setIsDisabled(true)
             setMsgtext("Please Enter Something")
         }
 
         else if(textvalue.trim().length <= 10){
-            isDisabled = true
+            setIsDisabled(true)
             setMsgtext("Feedback Must be more than 10 charecters")
         }
 
         else {
-            isDisabled = false
+            setIsDisabled(false)
             setMsgtext("")
         }
     

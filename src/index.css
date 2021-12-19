@@ -51,6 +51,12 @@ justify-items: center;}
     right: 5px;
 }
 
+.edit{
+    position: absolute;
+    top: -5px;
+    right: 40px;    
+}
+
 .average{
     display: flex;
     width: 100%;
@@ -171,3 +177,4 @@ input[type='radio']:checked:after {
 .active{
     color: rgb(243, 241, 101) !important;
 }
+
