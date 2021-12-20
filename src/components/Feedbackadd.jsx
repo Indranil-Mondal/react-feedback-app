@@ -10,7 +10,7 @@ import Message from "./shared/Message";
 
 function Feedbackadd() {
 
-    const {handleAdd, editedFeedbackItem, handleUpdate} = useContext(FeedbackContext)
+    const {handleAdd, editedFeedbackItem, handleUpdate, isDisabled, setIsDisabled} = useContext(FeedbackContext)
 
     const [textvalue, setTextvalue] = useState("")
 
@@ -18,12 +18,19 @@ function Feedbackadd() {
 
     const [selectedRate, setSelectedRate] = useState("")
 
-    const [isDisabled, setIsDisabled] = useState(true)
+    
 
     console.log(isDisabled)
 
     
+    useEffect(() => {
 
+        setTextvalue(editedFeedbackItem.item.text)
+        setSelectedRate(editedFeedbackItem.item.rating)
+        
+        
+
+    }, [editedFeedbackItem])
 
 
 
@@ -61,21 +68,14 @@ function Feedbackadd() {
         
     }
 
-    useEffect(() => {
-
-        setTextvalue(editedFeedbackItem.item.text)
-        setSelectedRate(editedFeedbackItem.item.rating)
-        
-        
-
-    }, [editedFeedbackItem])
+    
 
     
 
     const handleChange = (e) => {
 
         setTextvalue(e.currentTarget.value)
-        console.log("HandleChange Textvalue:" + e.currentTarget.value )
+        
 
         
         if(e.currentTarget.value === ''){

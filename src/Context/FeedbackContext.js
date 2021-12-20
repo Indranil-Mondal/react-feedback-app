@@ -7,6 +7,7 @@ const FeedbackContext = createContext("")
 export const FeedbackProvider = ({children}) => {
 
     const [feedback, setFeedback] = useState(data);
+    const [isDisabled, setIsDisabled] = useState(true);
 
     const [editedFeedbackItem, setEditedFeedbackItem] = useState(
       {
@@ -49,8 +50,12 @@ export const FeedbackProvider = ({children}) => {
           editOn: true,
         }
       )
+
+      setIsDisabled(false)
       
     }
+
+    
 
     return <FeedbackContext.Provider value={{
 
@@ -60,6 +65,8 @@ export const FeedbackProvider = ({children}) => {
         editFeedback,
         editedFeedbackItem,
         handleUpdate,
+        isDisabled,
+        setIsDisabled,
         
 
     }}>
