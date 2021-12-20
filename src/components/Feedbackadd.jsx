@@ -20,6 +20,8 @@ function Feedbackadd() {
 
     const [isDisabled, setIsDisabled] = useState(true)
 
+    console.log(isDisabled)
+
     
 
 
@@ -54,7 +56,7 @@ function Feedbackadd() {
         }
 
         
-        setTextvalue('')
+        setTextvalue("")
 
         
     }
@@ -63,7 +65,7 @@ function Feedbackadd() {
 
         setTextvalue(editedFeedbackItem.item.text)
         setSelectedRate(editedFeedbackItem.item.rating)
-        setIsDisabled(false)
+        
         
 
     }, [editedFeedbackItem])
@@ -72,14 +74,16 @@ function Feedbackadd() {
 
     const handleChange = (e) => {
 
-        setTextvalue(e.target.value)
+        setTextvalue(e.currentTarget.value)
+        console.log("HandleChange Textvalue:" + e.currentTarget.value )
 
-        if(textvalue === ''){
+        
+        if(e.currentTarget.value === ''){
             setIsDisabled(true)
             setMsgtext("Please Enter Something")
         }
 
-        else if(textvalue.trim().length <= 10){
+        else if(e.currentTarget.value.trim().length <= 10){
             setIsDisabled(true)
             setMsgtext("Feedback Must be more than 10 charecters")
         }

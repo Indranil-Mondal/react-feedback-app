@@ -10,7 +10,10 @@ export const FeedbackProvider = ({children}) => {
 
     const [editedFeedbackItem, setEditedFeedbackItem] = useState(
       {
-        item: {},
+        item: {
+          textvalue : "",
+          rating: "",
+        },
         editOn: false,
       }
     )
