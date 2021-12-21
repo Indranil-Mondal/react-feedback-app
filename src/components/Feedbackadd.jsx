@@ -20,13 +20,15 @@ function Feedbackadd() {
 
     
 
-    console.log(isDisabled)
+    
 
     
     useEffect(() => {
-
+       
+       if(editedFeedbackItem.editOn===true){
         setTextvalue(editedFeedbackItem.item.text)
         setSelectedRate(editedFeedbackItem.item.rating)
+       }
         
         
 
@@ -44,13 +46,14 @@ function Feedbackadd() {
         
         e.preventDefault()
 
-        
+       
 
-        const newData= {
-            id: Math.random() ,
-            rating: selectedRate ,
-            text: textvalue
-        }
+            const newData= {
+                id: Math.random() ,
+                rating: selectedRate ,
+                text: textvalue
+            }
+        
 
         if(editedFeedbackItem.editOn===true ){
 
@@ -58,12 +61,17 @@ function Feedbackadd() {
 
         }
 
-        else {
+        else if(newData.text.trim().length>0 && newData.rating>0) {
             handleAdd(newData)
+        }
+
+        else {
+            setMsgtext("Can't Add Blank Feedback")
         }
 
         
         setTextvalue("")
+        setIsDisabled(true)
 
         
     }
